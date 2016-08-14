@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% load urlify %}
+{% block head_title %}
+{{ instance.title }}| {{ block.super }}
+{% endblock head_title %}
+<style>
+   {% block style %}
+   h1{
+      color: green;
+   }
+   /* hover */
+   .grow img {
+     -webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+          -o-transition: all 1s ease;
+         -ms-transition: all 1s ease;
+             transition: all 1s ease;
+   }
+   .grow img:hover {
+     width: 400px;
+     height: 400px;
+   }
+   {% endblock style %}
+</style>
+{% block content %}
+<div class='row'>
+   <div class='col-sm-4'>
+      <div class="grow pic">
+          {% if instance.image %}
+            <figure><img src='{{ instance.image.url }}' class='img-responsive' /></figure>
+         {% endif %}
+      </div>
+      <p>
+      <div class="fb-like" data-href="{{ request.build_absolute_url }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true">
+      </div>
+      <hr/>
+      </p>
+      <div class="fb-comments" data-href="{{ request.build_absolute_url }}" data-numposts="5"></div>
+ </div>
+   <!--  -->
+   <div class='col-sm-4'>
+    <h1>{{title}}<small>{% if instance.draft %} <span style='color:red'> Draft </span>{% endif %}{{ instance.publish }}</small></h1>
+      <p>price: 50 VND(in stock)</p>
+      {% if instance.user.get_full_name %}
+      <p>Author: {{ instance.user.get_full_name }}</p>
+      {% endif %}
+     <p style="color:red">Content:</p>{{ instance.content|linebreaks }}</br>
+   </div>
+   <div class='col-sm-4'>
+      <h1>Selling products</h1>
+      <div>
+      
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src='{{ instance.image.url }}' width='100px' height='150px' >
+          </a>
+        </div>
+        <div class="media-body">
+           <h4>{{title}}<small>{% if instance.draft %} <span style='color:red'> Draft </span>{% endif %}{{ instance.publish }}</small></h4>
+            <p>price: 50 VND(in stock)</p>
+            <p>Product code:987NK07VDU1302</p>
+            <p>
+            <a href='' class="btn btn-success" role="button"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Add to Cart</a>     
+            <a href='{{ obj.get_absolute_url }}' class="btn btn-primary" role="button"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Detail</a>      
+           </p>
+        </div>
+     </div> 
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src='{{ instance.image.url }}' width='100px' height='150px' >
+          </a>
+        </div>
+        <div class="media-body">
+           <h4>{{title}}<small>{% if instance.draft %} <span style='color:red'> Draft </span>{% endif %}{{ instance.publish }}</small></h4>
+            <p>price: 50 VND(in stock)</p>
+            <p>Product code:987NK07VDU1302</p>
+            <p>
+            <a href='' class="btn btn-success" role="button"> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Add to Cart</a>     
+            <a href='{{ obj.get_absolute_url }}' class="btn btn-primary" role="button"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Detail</a>      
+           </p>
+        </div>
+     </div> 
+      </div>
+   </div>
+</div>
+
+{% endblock content %}
